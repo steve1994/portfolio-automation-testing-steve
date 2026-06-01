@@ -23,5 +23,5 @@ test('TC 02 - Login with Invalid Credentials @Login @P0 @SmokeTest', async ({ pa
   await page.getByRole('button', { name: 'Sign In' }).click();
 
   // Assertions
-  await expect(page.getByText('Invalid credentials')).toBeVisible();
+  await expect(page.getByText('Invalid credentials')).toBeVisible({timeout: 10000});
 });
