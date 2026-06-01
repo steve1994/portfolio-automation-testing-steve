@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Scenario Login - Test Case 01 - Successfull Login @P0 @SmokeTest', async ({ page }) => {
+test('TC 01 - Login with Valid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
   // Preconditions
   await page.goto('https://www.emra.chat/login');
   
@@ -13,7 +13,7 @@ test('Scenario Login - Test Case 01 - Successfull Login @P0 @SmokeTest', async (
   await expect(page.getByRole('heading', { name: 'Emra', exact: true })).toBeVisible();
 });
 
-test('Scenario Login - Test Case 02 - Invalid Credentials Failed Login @P0 @SmokeTest', async ({ page }) => {
+test('TC 02 - Login with Invalid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
   // Preconditions
   await page.goto('https://www.emra.chat/login');
   
