@@ -1,27 +1,27 @@
 import { test, expect } from '@playwright/test';
+import { LoginPage } from '../pages/login.page';
 
-test('TC 01 - Login with Valid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
-  // Preconditions
-  await page.goto('https://www.emra.chat/login');
-  
-  // Actions
-  await page.getByRole('textbox', { name: 'Email' }).fill('steve.harnadi@gmail.com');
-  await page.getByRole('textbox', { name: 'Password' }).fill('Welcome@12345');
-  await page.getByRole('button', { name: 'Sign In' }).click();
-  
-  // Assertions
-  await expect(page.getByRole('heading', { name: 'Emra', exact: true })).toBeVisible();
-});
+test.describe('Login Scenarios', () => {
+  let loginPage: LoginPage;
 
-test('TC 02 - Login with Invalid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
-  // Preconditions
-  await page.goto('https://www.emra.chat/login');
-  
-  // Actions
-  await page.getByRole('textbox', { name: 'Email' }).fill('wrongemail@gmail.com');
-  await page.getByRole('textbox', { name: 'Password' }).fill('abcdefg@123445');
-  await page.getByRole('button', { name: 'Sign In' }).click();
+  test.beforeEach(async ({ page }) => {
+    loginPage = new LoginPage(page);
+    await loginPage.goto();
+  });
 
-  // Assertions
-  await expect(page.getByText('Invalid credentials')).toBeVisible({timeout: 10000});
+  test('TC 01 - Login with Valid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
+    // Actions
+    await loginPage.login('steve.harnadi@gmail.com', 'Welcome@12345');
+    
+    // Assertions
+    await expect(loginPage.emraHeading).toBeVisible();
+  });
+
+  test('TC 02 - Login with Invalid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
+    // Actions
+    await loginPage.login('wrongemail@gmail.com', 'abcdefg@123445');
+
+    // Assertions
+    await expect(page.getByText('Invalid credentials')).toBeVisible({ timeout: 10000 });
+  });
 });
