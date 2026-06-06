@@ -1,26 +1,21 @@
 import { test, expect } from '@playwright/test';
+import { RegisterPage } from '../pages/register.page';
+import { faker } from '@faker-js/faker';
 
 test('TC 01 - Successful Registration Test Case @Register @P0 @SmokeTest', async ({ page }) => {
-  await page.goto('https://www.emra.chat/login');
-  await page.getByRole('link', { name: 'Sign up' }).click();
+  const registerPage = new RegisterPage(page);
+
+  await registerPage.goto();
+  await registerPage.clickSignUp();
 
   // Fill in Account Information
-  await page.getByRole('textbox', { name: 'Email' }).fill('steve.harnadi+2@gmail.com');
-  await page.getByRole('textbox', { name: 'Password', exact: true }).fill('Welcome@12345');
-  await page.getByRole('textbox', { name: 'Confirm Password' }).fill('Welcome@12345');
-  await page.getByRole('button', { name: 'Next' }).click();
+  await registerPage.fillAccountInformation(faker.internet.email(), faker.internet.password());
 
   // Fill in Personal Information
-  await page.getByRole('textbox', { name: 'Full Name' }).fill('Steve Immanuel Harnadi v2');
-  await page.getByRole('combobox').click();
-  await page.getByRole('textbox', { name: 'Phone Number' }).fill('813432542555');
-  await page.getByRole('button', { name: 'Next' }).click();
+  await registerPage.fillPersonalInformation(faker.person.fullName(), faker.string.numeric(12));
 
   // Fill in Company Information
-  await page.getByRole('textbox', { name: 'Company Name' }).fill('Company Steve v2');
-  await page.getByLabel('Industry').selectOption('finance');
-  await page.getByLabel('Company Size').selectOption('51-200');
-  await page.getByRole('button', { name: 'Create Account' }).click();
+  await registerPage.fillCompanyInformation(faker.company.name(), 'finance', '51-200');
 
   // Assertions
   await expect(page.getByRole('heading', { name: 'Emra' })).toBeVisible();
