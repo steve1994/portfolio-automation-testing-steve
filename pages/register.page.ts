@@ -40,8 +40,11 @@ export class RegisterPage {
   }
 
   async fillAccountInformation(email: string, pass: string) {
+    await this.emailField.click();
     await this.emailField.fill(email);
+    await this.passwordField.click();
     await this.passwordField.fill(pass);
+    await this.confirmPasswordField.click();
     await this.confirmPasswordField.fill(pass);
     await this.nextButton.click();
   }
