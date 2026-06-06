@@ -14,6 +14,8 @@ export class RegisterPage {
   readonly industrySelect: Locator;
   readonly companySizeSelect: Locator;
   readonly createAccountButton: Locator;
+  readonly emraHeading: Locator;
+  readonly emailAlreadyTakenError: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -29,6 +31,8 @@ export class RegisterPage {
     this.industrySelect = page.getByLabel('Industry');
     this.companySizeSelect = page.getByLabel('Company Size');
     this.createAccountButton = page.getByRole('button', { name: 'Create Account' });
+    this.emraHeading = page.getByRole('heading', { name: 'Emra', exact: true });
+    this.emailAlreadyTakenError = page.getByText('Email has already been taken');
   }
 
   async goto() {
