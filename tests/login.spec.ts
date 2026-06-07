@@ -19,7 +19,7 @@ test.describe('Login Scenarios', () => {
 
   test('TC 02 - Login with Invalid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
     // Actions
-    await loginPage.login('wrongemail@gmail.com', 'abcdefg@123445');
+    await loginPage.login('wrongemail@gmail.com', 'abcfsdfg@123445');
 
     // Assertions
     await expect(page.getByText('Invalid credentials')).toBeVisible({ timeout: 10000 });
