@@ -11,8 +11,8 @@ jobs:
     container:
       image: steveharnadi1994/portfolio-automation-qasteve:base
       credentials:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        username: "${{ vars.DOCKERHUB_USERNAME }}"
+        password: "${{ secrets.DOCKERHUB_TOKEN }}"
     steps:
     - name: Run Playwright tests
       run: npx playwright test
