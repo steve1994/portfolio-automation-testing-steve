@@ -11,6 +11,7 @@ jobs:
     container:
       image: steveharnadi1994/portfolio-automation-qasteve:base
     steps:
+    - uses: actions/checkout@v4
     - name: Run Playwright tests
       run: npx playwright test
     - uses: actions/upload-artifact@v4
