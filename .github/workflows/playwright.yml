@@ -11,9 +11,22 @@ jobs:
     container:
       image: steveharnadi1994/portfolio-automation-qasteve:base
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Install Playwright Browsers
+      run: npx playwright install --with-deps chromium
+      env:
+        PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+        PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+        
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
