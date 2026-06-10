@@ -50,20 +50,20 @@ export class RegisterPage {
     await this.passwordField.fill(pass);
     await this.confirmPasswordField.click();
     await this.confirmPasswordField.fill(pass);
-    await this.nextButton.click();
+    await this.nextButton.click({timeout : 10000});
   }
 
   async fillPersonalInformation(fullName: string, phone: string) {
     await this.fullNameField.fill(fullName);
     await this.phoneCombobox.click();
     await this.phoneField.fill(phone);
-    await this.nextButton.click();
+    await this.nextButton.click({timeout : 10000});
   }
 
   async fillCompanyInformation(companyName: string, industry: string, size: string) {
     await this.companyNameField.fill(companyName);
     await this.industrySelect.selectOption(industry);
     await this.companySizeSelect.selectOption(size);
-    await this.createAccountButton.click();
+    await this.createAccountButton.click({timeout : 10000});
   }
 }
