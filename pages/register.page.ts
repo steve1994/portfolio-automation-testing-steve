@@ -50,6 +50,8 @@ export class RegisterPage {
     await this.passwordField.fill(pass);
     await this.confirmPasswordField.click();
     await this.confirmPasswordField.fill(pass);
+    await this.nextButton.waitFor({ state: 'visible' });
+    await this.nextButton.isEnabled();
     await this.nextButton.click();
   }
 
@@ -57,6 +59,8 @@ export class RegisterPage {
     await this.fullNameField.fill(fullName);
     await this.phoneCombobox.click();
     await this.phoneField.fill(phone);
+    await this.nextButton.waitFor({ state: 'visible' });
+    await this.nextButton.isEnabled();
     await this.nextButton.click();
   }
 
