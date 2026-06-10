@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
+import { faker } from '@faker-js/faker';
 
 test.describe('Login Scenarios', () => {
   let loginPage: LoginPage;
@@ -19,7 +20,7 @@ test.describe('Login Scenarios', () => {
 
   test('TC 02 - Login with Invalid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
     // Actions
-    await loginPage.login('wrongemail@gmail.com', 'abcfsdfg@123445');
+    await loginPage.login(faker.internet.email(), faker.internet.password());
 
     // Assertions
     await expect(page.getByText('Invalid credentials')).toBeVisible({ timeout: 10000 });
