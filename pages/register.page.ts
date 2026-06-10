@@ -20,8 +20,8 @@ export class RegisterPage {
   constructor(page: Page) {
     this.page = page;
     this.signUpLink = page.getByRole('link', { name: 'Sign up' });
-    this.emailField = page.locator('#email');
-    this.passwordField = page.locator('#password');
+    this.emailField = page.getByRole('textbox', { name: 'Email' });
+    this.passwordField = page.getByRole('textbox', { name: 'Password', exact: true });
     this.confirmPasswordField = page.locator('#confirmPassword');
     this.nextButton = page.getByRole('button', { name: 'Next' });
     this.fullNameField = page.getByRole('textbox', { name: 'Full Name' });
@@ -41,17 +41,16 @@ export class RegisterPage {
 
   async clickSignUp() {
     await this.signUpLink.click();
+    await this.page.waitForURL('**/signup');
   }
 
   async fillAccountInformation(email: string, pass: string) {
-    await this.emailField.click();
     await this.emailField.fill(email);
-    await this.passwordField.click();
+    await this.emailField.press('Tab');
     await this.passwordField.fill(pass);
-    await this.confirmPasswordField.click();
+    await this.emailField.press('Tab');
     await this.confirmPasswordField.fill(pass);
-    await this.nextButton.waitFor({ state: 'visible' });
-    await this.nextButton.isEnabled();
+    await this.confirmPasswordField.press('Tab');
     await this.nextButton.click();
   }
 
@@ -59,8 +58,6 @@ export class RegisterPage {
     await this.fullNameField.fill(fullName);
     await this.phoneCombobox.click();
     await this.phoneField.fill(phone);
-    await this.nextButton.waitFor({ state: 'visible' });
-    await this.nextButton.isEnabled();
     await this.nextButton.click();
   }
 
