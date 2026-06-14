@@ -11,9 +11,12 @@ test.describe('Login Scenarios', () => {
   });
 
   test('TC 01 - Login with Valid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
+    const validEmail = (process.env.VALID_LOGIN_EMAIL) as string;
+    const validPassword = (process.env.VALID_LOGIN_PASSWORD) as string;
+
     // Actions
-    await loginPage.login('steve.harnadi@gmail.com', 'Welcome@12345');
-    
+    await loginPage.login(validEmail, validPassword);
+
     // Assertions
     await expect(loginPage.emraHeading).toBeVisible();
   });

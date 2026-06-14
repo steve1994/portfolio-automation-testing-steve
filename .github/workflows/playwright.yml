@@ -1,8 +1,8 @@
 name: Playwright Tests
 on:
-  push:
-    branches: [ main, master ]
-  pull_request:
+  workflow_run:
+    workflows: [ "Build Base Docker Image" ]
+    types: [ completed ]
     branches: [ main, master ]
 jobs:
   test:
@@ -26,6 +26,8 @@ jobs:
       run: npx playwright test
       env:
         PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
+        VALID_LOGIN_EMAIL: ${{ secrets.LOGIN_VALID_EMAIL }}
+        VALID_LOGIN_PASSWORD: ${{ secrets.LOGIN_VALID_PASSWORD }}
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
