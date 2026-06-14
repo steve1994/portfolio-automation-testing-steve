@@ -36,7 +36,7 @@ export class RegisterPage {
   }
 
   async goto() {
-    await this.page.goto('https://www.emra.chat/login');
+    await this.page.goto('/login');
   }
 
   async clickSignUp() {
