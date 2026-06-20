@@ -12,6 +12,7 @@
     "@faker-js/faker": "^10.4.0",
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.9.1",
+    "agentq-playwright": "^1.0.67",
     "axios": "^1.18.0"
   },
   "dependencies": {
