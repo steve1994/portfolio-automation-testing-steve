@@ -8,8 +8,8 @@ test.describe('Login Scenarios', () => {
   let testStartTime: number;
 
   test.beforeEach(async ({ page }) => {
-    loginPage = new LoginPage(page);
     testStartTime = Date.now();
+    loginPage = new LoginPage(page);
     await loginPage.goto();
   });
 
