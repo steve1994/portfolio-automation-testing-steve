@@ -9,6 +9,7 @@ test.describe('Login Scenarios', () => {
 
   test.beforeEach(async ({ page }) => {
     testStartTime = Date.now();
+    
     loginPage = new LoginPage(page);
     await loginPage.goto();
   });
