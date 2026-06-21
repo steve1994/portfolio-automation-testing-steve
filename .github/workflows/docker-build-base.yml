@@ -28,7 +28,6 @@ jobs:
         env:
           DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
           AGENTQ_PROJECT_ID: ${{ secrets.AGENTQ_PROJECT_ID }}
-          AGENTQ_TESTRUN_ID: ${{ secrets.AGENTQ_TESTRUN_ID }}
           AGENTQ_EMAIL: ${{ vars.AGENTQ_EMAIL }}
           AGENTQ_PASSWORD: ${{ secrets.AGENTQ_PASSWORD }}
           AGENTQ_TOKEN: ${{ secrets.AGENTQ_TOKEN }}

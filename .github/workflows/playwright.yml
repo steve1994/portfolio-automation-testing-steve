@@ -28,6 +28,7 @@ jobs:
         PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
         VALID_LOGIN_EMAIL: ${{ secrets.LOGIN_VALID_EMAIL }}
         VALID_LOGIN_PASSWORD: ${{ secrets.LOGIN_VALID_PASSWORD }}
+        AGENTQ_TESTRUN_ID: ${{ secrets.AGENTQ_TESTRUN_ID }}
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
