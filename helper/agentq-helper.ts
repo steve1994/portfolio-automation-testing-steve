@@ -1,10 +1,13 @@
 import axios from 'axios';
+import agentqData from '../data/agentq.json' with { type: 'json' };
 
 const AGENTQ_API_URL = process.env.AGENTQ_API_URL || 'https://backend-app.agentq.id';
-const AGENTQ_PROJECT_ID = process.env.AGENTQ_PROJECT_ID;
-const AGENTQ_TESTRUN_ID = process.env.AGENTQ_TESTRUN_ID;
-const AGENTQ_EMAIL = process.env.AGENTQ_EMAIL;
-const AGENTQ_PASSWORD = process.env.AGENTQ_PASSWORD;
+const {
+  email: AGENTQ_EMAIL,
+  password: AGENTQ_PASSWORD,
+  project_id: AGENTQ_PROJECT_ID,
+  testrun_id: AGENTQ_TESTRUN_ID
+} = agentqData.agentq_credential;
 
 let accessToken: string;
 

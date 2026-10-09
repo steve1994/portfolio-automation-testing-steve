@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/login.page';
 import { faker } from '@faker-js/faker';
 import { pushTestResultToAgentQ } from '../helper/agentq-helper';
+import userData from '../data/user.json' with { type: 'json' };
 
 test.describe('Login Scenarios', () => {
   let loginPage: LoginPage;
@@ -15,11 +16,8 @@ test.describe('Login Scenarios', () => {
   });
 
   test('8 - TC 01 - Login with Valid Credentials @Login @P0 @SmokeTest', async ({ page }) => {
-    const validEmail = (process.env.VALID_LOGIN_EMAIL) as string;
-    const validPassword = (process.env.VALID_LOGIN_PASSWORD) as string;
-
     // Actions
-    await loginPage.login(validEmail, validPassword);
+    await loginPage.login(userData.valid_user_staging.email, userData.valid_user_staging.password);
 
     // Assertions
     await expect(loginPage.emraHeading).toBeVisible();
