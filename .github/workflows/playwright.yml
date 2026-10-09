@@ -25,8 +25,7 @@ jobs:
     - name: Run Playwright tests
       run: npx playwright test
       env:
-        PLAYWRIGHT_BROWSERS_PATH: /ms-playwright}
-        AGENTQ_TESTRUN_ID: ${{ secrets.AGENTQ_TESTRUN_ID }}
+        PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
