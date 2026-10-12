@@ -1,0 +1,16 @@
+{
+  "success": true,
+  "data": {
+    "user": {
+      "id": 1,
+      "email": "user@example.com",
+      "name": "John Doe",
+      "role": "owner",
+      "status": "active",
+      "phone_number": "+628123456789",
+      "country": "Indonesia",
+      "country_code": "+62"
+    },
+    "feature_flags": {}
+  }
+}
