@@ -1,0 +1,26 @@
+{
+  "mcp": {
+    "servers": {
+      "playwright": {
+        "type": "local",
+        "command": [
+          "node",
+          "D:\\Bootcamp QA Automation Emra\\mcp-playwright\\server.js"
+        ]
+      },
+      "http": {
+        "type": "local",
+        "command": [
+          "agentq",
+          "https://mcp.agentq.id/mcp"
+        ]
+      },
+      "agentq": {
+        "type": "local",
+        "command": [
+          "https://mcp.agentq.id/mcp"
+        ]
+      }
+    }
+  }
+}

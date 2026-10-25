@@ -7,7 +7,7 @@ import { Validator } from 'jsonschema';
 test('User successfully get current user', async ({ request }) => {
 
   // Precondition
-  const baseURL = process.env.API_BASE_URL || 'http://api.emra.chat';
+  const baseURL = process.env.API_BASE_URL || 'https://api.emra.chat';
   const email = dataTest.valid_user_staging.email
   const password = dataTest.valid_user_staging.password
 

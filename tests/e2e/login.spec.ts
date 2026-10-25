@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from '../pages/login.page';
+import { LoginPage } from '../../pages/login.page';
 import { faker } from '@faker-js/faker';
-import { pushTestResultToAgentQ } from '../helper/agentq-helper';
-import userData from '../data/user.json' with { type: 'json' };
+import { pushTestResultToAgentQ } from '../../helper/agentq-helper';
+import userData from '../../data/user.json' with { type: 'json' };
 
 test.describe('Login Scenarios', () => {
   let loginPage: LoginPage;

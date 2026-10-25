@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { RegisterPage } from '../pages/register.page';
+import { RegisterPage } from '../../pages/register.page';
 import { faker } from '@faker-js/faker';
 
 test.describe('Register Scenarios', () => {
