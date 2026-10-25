@@ -16,10 +16,8 @@
         ]
       },
       "agentq": {
-        "type": "local",
-        "command": [
-          "https://mcp.agentq.id/mcp"
-        ]
+        "type": "remote",
+        "url": "https://mcp.agentq.id/mcp"
       }
     }
   }

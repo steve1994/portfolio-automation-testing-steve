@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "AgentQ API Testing - Tag response body schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "data": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "error_code": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "message": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "success"
+  ],
+  "oneOf": [
+    {
+      "title": "Success Response",
+      "type": "object",
+      "properties": {
+        "success": {
+          "enum": [true]
+        }
+      },
+      "required": [
+        "success",
+        "data"
+      ]
+    },
+    {
+      "title": "Error Response",
+      "type": "object",
+      "properties": {
+        "success": {
+          "enum": [false]
+        }
+      },
+      "required": [
+        "success",
+        "errors"
+      ]
+    }
+  ]
+}
