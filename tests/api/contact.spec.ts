@@ -27,11 +27,30 @@ import contactSchema from '../../json-schema/contact-json-schema.json' with { ty
 import tagsListSchema from '../../json-schema/tags-list-json-schema.json' with { type: 'json' };
 import tagSchema from '../../json-schema/tag-json-schema.json' with { type: 'json' };
 import { Validator } from 'jsonschema';
+import { pushTestResultToAgentQ } from '../../helper/agentq-helper';
 
 const baseURL = process.env.API_BASE_URL || 'https://api.emra.chat';
 
+// Fungsi untuk menghapus kode warna ANSI dari teks error agar readable di AgentQ
+function stripAnsi(text: string): string {
+  return text.replace(/\x1b\[[0-9;]*[a-zA-Z]/g, '').replace(/\u001b\[[0-9;]*[a-zA-Z]/g, '');
+}
+
+// Fungsi untuk mengumpulkan detail error dari testInfo dalam format yang readable
+function formatErrorDetails(errors: Array<{ message?: string; stack?: string }>): string {
+  return errors
+    .map((e) => {
+      const parts: string[] = [];
+      if (e.message) parts.push(stripAnsi(e.message));
+      if (e.stack) parts.push(stripAnsi(e.stack.split('\n').slice(0, 5).join('\n'))); // ambil 5 baris pertama stack
+      return parts.join('\n');
+    })
+    .join('\n\n--- Next Error ---\n\n');
+}
+
 test.describe('US-06 Manage Contacts API Testing', () => {
   let accessToken: string;
+  let testStartTime: number;
 
   const email = dataTest.valid_user_staging.email;
   const password = dataTest.valid_user_staging.password;
@@ -69,6 +88,7 @@ test.describe('US-06 Manage Contacts API Testing', () => {
   };
 
   test.beforeEach(async ({ request }) => {
+    testStartTime = Date.now();
     accessToken = await auth(request, baseURL, email, password);
   });
 
@@ -689,5 +709,13 @@ test.describe('US-06 Manage Contacts API Testing', () => {
     const validator = new Validator();
     const result = validator.validate(body, contactSchema);
     expect(result.errors).toHaveLength(0);
+  });
+
+  test.afterEach(async ({}, testInfo) => {
+    const executionTime = Date.now() - testStartTime;
+    const errorDetails = testInfo.errors.length > 0 ? formatErrorDetails(testInfo.errors) : '';
+    const title = testInfo.title ?? 'Unknown test';
+    const status = testInfo.status ?? 'unknown';
+    await pushTestResultToAgentQ(title, status, executionTime, errorDetails);
   });
 });
