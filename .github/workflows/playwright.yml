@@ -23,7 +23,7 @@ jobs:
         PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: docker.sh
       env:
         PLAYWRIGHT_BROWSERS_PATH: /ms-playwright
 
