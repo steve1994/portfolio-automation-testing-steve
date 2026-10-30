@@ -78,6 +78,23 @@ async function createExistingTag(request: any, accessToken: string, name: string
   return body.data.tag;
 }
 
+// Fungsi untuk menghapus kode warna ANSI dari teks error agar readable di AgentQ
+function stripAnsi(text: string): string {
+  return text.replace(/\x1b\[[0-9;]*[a-zA-Z]/g, '').replace(/\u001b\[[0-9;]*[a-zA-Z]/g, '');
+}
+
+// Fungsi untuk mengumpulkan detail error dari testInfo dalam format yang readable
+function formatErrorDetails(errors: Array<{ message?: string; stack?: string }>): string {
+  return errors
+    .map((e) => {
+      const parts: string[] = [];
+      if (e.message) parts.push(stripAnsi(e.message));
+      if (e.stack) parts.push(stripAnsi(e.stack.split('\n').slice(0, 5).join('\n'))); // ambil 5 baris pertama stack
+      return parts.join('\n');
+    })
+    .join('\n\n--- Next Error ---\n\n');
+}
+
 test.describe('Contact Management E2E Testing (AgentQ TC 26-44)', () => {
   let contactPage: ContactPage;
   let tagPage: TagPage;
@@ -768,7 +785,7 @@ test.describe('Contact Management E2E Testing (AgentQ TC 26-44)', () => {
 
   test.afterEach(async ({}, testInfo) => {
     const executionTime = Date.now() - testStartTime;
-    const errorDetails = testInfo.errors.map((e) => e.message).join('; ');
+    const errorDetails = testInfo.errors.length > 0 ? formatErrorDetails(testInfo.errors) : '';
     const title = testInfo.title ?? 'Unknown test';
     const status = testInfo.status ?? 'unknown';
     await pushTestResultToAgentQ(title, status, executionTime, errorDetails);
