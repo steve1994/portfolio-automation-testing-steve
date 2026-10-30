@@ -411,6 +411,7 @@ test.describe('Contact Management E2E Testing (AgentQ TC 26-44)', () => {
     // ===================== Assertion (Expected Result) =====================
     // 1. User successfully add new tag name into the system.
     // 2. User can view the new tag name in the list of /contact/tags menu.
+    await tagPage.tagRow(tagName).scrollIntoViewIfNeeded();
     await expect(tagPage.tagRow(tagName)).toBeVisible({ timeout: 10000 });
   });
 

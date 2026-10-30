@@ -146,7 +146,7 @@ export class ContactPage {
   }
 
   async clickEditContact(contactName: string) {
-    await this.editContactIcon.nth(0).click();
+    await this.editContactIcon.nth(1).click();
   }
 
   async clickDeleteContact(contactName: string) {
