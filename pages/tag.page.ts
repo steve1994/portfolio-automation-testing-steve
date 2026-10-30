@@ -98,12 +98,14 @@ export class TagPage {
 
   // Aksi berdasarkan nama tag pada baris tabel (row)
   async clickEditTag(tagName: string) {
-    const row = this.page.getByRole('row', { name: tagName });
+    const row = this.page.getByText(tagName);
+    await row.scrollIntoViewIfNeeded();
     await row.locator(this.editTagIcon).first().click();
   }
 
   async clickDeleteTag(tagName: string) {
-    const row = this.page.getByRole('row', { name: tagName });
+    const row = this.page.getByText(tagName);
+    await row.scrollIntoViewIfNeeded();
     await row.locator(this.deleteTagIcon).first().click();
   }
 
@@ -112,6 +114,7 @@ export class TagPage {
   }
 
   tagRow(tagName: string): Locator {
-    return this.page.getByRole('row', { name: tagName });
+    // return this.page.getByRole('row', { name: tagName });
+    return this.page.getByText(tagName);
   }
 }

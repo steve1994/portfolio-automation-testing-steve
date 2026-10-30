@@ -587,6 +587,7 @@ test.describe('Contact Management E2E Testing (AgentQ TC 26-44)', () => {
     // ===================== Assertion (Expected Result) =====================
     // 1. User successfully edits existing tag's name inside /contact/tags menu.
     // 2. User can view the edited tag name in the list of /contact/tags menu.
+    await tagPage.tagRow(tagName).scrollIntoViewIfNeeded();
     await expect(tagPage.tagRow(updatedTagName)).toBeVisible({ timeout: 10000 });
   });
 
